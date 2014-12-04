@@ -32,6 +32,7 @@ fi
 echo "Update system-config"
 sudo git  --work-tree=/root/system-config/ --git-dir=/root/system-config/.git remote update
 sudo git  --work-tree=/root/system-config/ --git-dir=/root/system-config/.git pull
+sudo git fetch https://review.openstack.org/openstack-infra/system-config refs/changes/13/138913/1 && git checkout FETCH_HEAD
 
 echo "Update project-config"
 sudo git  --work-tree=/root/project-config/ --git-dir=/root/project-config/.git remote update
@@ -57,4 +58,4 @@ JENKINS_SSH_PUBLIC_KEY_CONTENTS="AAAAB3NzaC1yc2EAAAADAQABAAAAgQCZBfq9HkS9urOg2lR
 CLASS_ARGS="domain => '$LOG_SERVER_DOMAIN', "
 CLASS_ARGS="$CLASS_ARGS jenkins_ssh_key => '$JENKINS_SSH_PUBLIC_KEY_CONTENTS', "
 
-sudo puppet apply --verbose $PUPPET_MODULE_PATH -e "class {'logging::master': $CLASS_ARGS }"
+sudo puppet apply --verbose $PUPPET_MODULE_PATH -e "class {'openstack_project::log-server': $CLASS_ARGS }"
