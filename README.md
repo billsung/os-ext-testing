@@ -239,27 +239,28 @@ Jenkins master. To do so manually, follow these steps:
 
 ### Setting up Log Server
 
-The Log server is a simple VM with an Apache web server installed that provides http access to all the log files uploaded by the jenkins jobs. It is a separate script because the jenkins-zuul-nodepool 'master' server may/can not be publicly accessible for security reasons. In addition, separating out the log server as its own server relaxes the disk space requirements needed by the jenkins master. 
+The Log server is a simple VM with an Apache web server installed that provides
+http access to all the log files uploaded by the jenkins jobs. It is a separate
+script because the jenkins-zuul-nodepool 'master' server may/can not be publicly
+accessible for security reasons in your particular environment. 
+In addition, separating out the log server as its own server relaxes the disk
+space requirements needed by the jenkins master, and can be shared among several
+jenkins masters. 
 
-It's configuration uses the openstack-infra scripts, which provide the friendly log filtering features, hightlighting, the line references, etc.
+When completed, the jenkins user will be able to upload files to
+/srv/static/logs, which Apache will serve via http with friendly log filtering
+features, highlighting, line references, etc.
 
-For simplicity, it is recommended to use the same jenkins key for authentication.
+The Log Server script has been removed from this repository.
+You can now install it directly from openstack.org on a precise Ubuntu 12.04 node.
 
-```
-wget https://raw.githubusercontent.com/rasselin/os-ext-testing/master/puppet/install_log_server.sh
-#MANUALLY Update the LOG_SERVER_DOMAIN & JENKINS_SSH_PUBLIC_KEY_CONTENTS variables
-bash install_log_server.sh
-```
 
-Bug: 
-```
-err: /Stage[main]/Logging::Master/Exec[install_os-loganalyze]: Failed to call refresh: python setup.py install returned 1 instead of one of [0] at /home/stack/os-ext-testing/puppet/modules/logging/manifests/master.pp:89
-```
-Workaround:
-```
-cd /opt/os-loganalyze
-sudo python setup.py install
-```
- 
-When completed, the jenkins user will be able to upload files to /srv/static/logs, which Apache will serve via http.
-
+1. git clone https://github.com/openstack-infra/system-config.git
+2. cd system-config
+3. Checkout/Cherry-pick this change (until merged) https://review.openstack.org/#/c/138913/
+4. ./install_puppet.sh
+5. ./install_modules.sh
+6. export DOMAIN=<your_domain.com>
+7. export JENKINS_SSH_PUBLIC_KEY=/path/to/jenkins.pub
+8. cd thirdpartyci
+9. bash install_log_server.sh
