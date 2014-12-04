@@ -1,6 +1,6 @@
-# A log slave that will store output logs for tests run by Jenkins.
+# A log server that will store output logs for tests run by Jenkins.
 # This will provide a persistent location where all logs from the
-# last 30 days can be accessed.
+# last 120 days can be accessed.
 
 class logging::master(
   $domain = 'mydomain.com',
@@ -12,12 +12,12 @@ class logging::master(
   $swift_tenant_name = '',
   $swift_region_name = '',
   $swift_default_container = '',
+  $project_config_repo = '',
 ) {
 
-  #class { 'openstack_project::server':
-  #  iptables_public_tcp_ports => [22, 80, 443],
-  #  sysadmins                 => $sysadmins,
-  #}
+  class { 'project_config':
+    url  => $project_config_repo,
+  }
 
   include openstack_project
   class { 'jenkins::jenkinsuser':
@@ -37,8 +37,10 @@ class logging::master(
     ensure => present,
   }
 
-  file { '/srv/static':
-    ensure => directory,
+  if ! defined(File['/srv/static']) {
+    file { '/srv/static':
+      ensure => directory,
+    }
   }
 
   apache::vhost { "logs.$domain":
@@ -73,11 +75,17 @@ class logging::master(
     require => File['/srv/static/logs'],
   }
 
+  package { 'keyring':
+    ensure   => 'latest',
+    provider => 'pip',
+  }
+
   vcsrepo { '/opt/os-loganalyze':
     ensure   => latest,
     provider => git,
     revision => 'master',
     source   => 'https://git.openstack.org/openstack-infra/os-loganalyze',
+    require  => Package['keyring'],
   }
 
   exec { 'install_os-loganalyze':
