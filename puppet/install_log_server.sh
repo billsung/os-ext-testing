@@ -8,7 +8,7 @@ THIS_DIR=`pwd`
 
 # TODO: Either edit the variables here and make sure the values are correct, or
 # set them before running this script
-: ${LOG_SERVER_DOMAIN:=csim.hp.com}
+: ${LOG_SERVER_DOMAIN:=127.0.0.1}
 # No whitespace (i.e. remove "ssh-rsa " identifier and ending comment field)!
 : ${JENKINS_SSH_PUBLIC_KEY_CONTENTS:="AAAAB3NzaC1yc2EAAAADAQABAAAAgQCZBfq9HkS9urOg2lRkv+9B3tKDLu9h3QRd43aoMXQLXmivurnGEeVf1mptpWGeMB6E89XC/+xsMM3MxAlTQAuaTEhQ0aZjYpdawToYaj92BvoQRNShvQOOTIeehcZwJzudXu1WLXlv1+0gJIwPswkVqfnn5ptXePh3qhb2jFaZUQ=="}
 
