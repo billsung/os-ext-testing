@@ -1,3 +1,14 @@
+I only use install_log.sh and install_slave.sh here. (I don't use nodepool, I use static slave.)
+And the os-ext-testing-data is here https://github.com/johnnychou/os-ext-testing-data .
+Note that the id_rsa and jenkins_key better generate and then replace them by yourself. 
+Finally modify the var.sh, you should change the following terms.
+GIT_EMAIL GIT_NAME UPSTREAM_GERRIT_USER JENKINS_SSH_PUBLIC_KEY_NO_WHITESPACE (MYSQL_ROOT_PASSWORD MYSQL_PASSWORD)
+
+As for the CI Master node, follow the latest https://github.com/openstack-infra/puppet-openstackci/blob/master/contrib/README.md .
+And use the project-config example here https://github.com/openstack-infra/project-config-example .
+
+=====================================================================================================================================
+
 # OpenStack External Test Platform
 
 !! THIS REPOSITORY IS VERY MUCH A WORK IN PROGRESS !!
