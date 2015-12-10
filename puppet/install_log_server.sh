@@ -8,7 +8,7 @@ set -e
 # TODO: Either edit the variables here and make sure the values are correct, or
 # set them before running this script
 : ${DOMAIN:=127.0.0.1}
-: ${JENKINS_SSH_PUBLIC_KEY:="~/.ssh/jenkins_key.pub"}
+: ${JENKINS_SSH_PUBLIC_KEY:="AAAAB3NzaC1yc2EAAAADAQABAAAAgQCylHqU9YEt3nSMgsUOXh1OeENBh15x8fPfG0rivvkN7kgh0t6JEXGWu/NAHHEYqr5UQ4ul3uKqHgLDtBiEGMa1vtUWZOUYWrdQjEoTNM2SD1ZNDJ7biQoD2wxcpRZ9Y9i4ZQh9rGhOmo3YK53vzxTUApcON39KuefeN5OprCzcKw=="}
 
 PUPPET_MODULE_PATH="--modulepath=/etc/puppet/modules"
 
@@ -22,7 +22,7 @@ if [[ ! -e install_puppet.sh ]]; then
 fi
 
 CLASS_ARGS="domain => '$DOMAIN',
-            jenkins_ssh_key => '$(cat ${JENKINS_SSH_PUBLIC_KEY} | cut -d ' ' -f 2)', "
+            jenkins_ssh_key => '$JENKINS_SSH_PUBLIC_KEY', "
 
 set +e
 sudo puppet apply --test $PUPPET_MODULE_PATH -e "class {'openstackci::logserver': $CLASS_ARGS }"
