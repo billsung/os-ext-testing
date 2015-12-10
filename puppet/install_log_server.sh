@@ -10,7 +10,7 @@ THIS_DIR=`pwd`
 # set them before running this script
 : ${LOG_SERVER_DOMAIN:=127.0.0.1}
 # No whitespace (i.e. remove "ssh-rsa " identifier and ending comment field)!
-: ${JENKINS_SSH_PUBLIC_KEY_CONTENTS:="AAAAB3NzaC1yc2EAAAADAQABAAAAgQCZBfq9HkS9urOg2lRkv+9B3tKDLu9h3QRd43aoMXQLXmivurnGEeVf1mptpWGeMB6E89XC/+xsMM3MxAlTQAuaTEhQ0aZjYpdawToYaj92BvoQRNShvQOOTIeehcZwJzudXu1WLXlv1+0gJIwPswkVqfnn5ptXePh3qhb2jFaZUQ=="}
+: ${JENKINS_SSH_PUBLIC_KEY_CONTENTS:="AAAAB3NzaC1yc2EAAAADAQABAAAAgQCylHqU9YEt3nSMgsUOXh1OeENBh15x8fPfG0rivvkN7kgh0t6JEXGWu/NAHHEYqr5UQ4ul3uKqHgLDtBiEGMa1vtUWZOUYWrdQjEoTNM2SD1ZNDJ7biQoD2wxcpRZ9Y9i4ZQh9rGhOmo3YK53vzxTUApcON39KuefeN5OprCzcKw=="}
 
 OSEXT_PATH=$THIS_DIR/os-ext-testing
 OSEXT_REPO=https://github.com/johnnychou/os-ext-testing
