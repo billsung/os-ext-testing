@@ -157,14 +157,14 @@ class os_ext_testing::base(
     }
   }
 
-  file { '/etc/puppet/puppet.conf':
-    ensure  => present,
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0444',
-    content => template('openstack_project/puppet.conf.erb'),
-    replace => true,
-  }
+#  file { '/etc/puppet/puppet.conf':
+#    ensure  => present,
+#    owner   => 'root',
+#    group   => 'root',
+#    mode    => '0444',
+#    content => template('openstack_project/puppet.conf.erb'),
+#    replace => true,
+#  }
 
   service { 'puppet':
     ensure => stopped,
